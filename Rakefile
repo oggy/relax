@@ -19,6 +19,7 @@ begin
 
     gem.add_development_dependency('jeweler', '~> 0.11.0')
     gem.add_development_dependency('rspec', '~> 1.2.2')
+    gem.add_development_dependency('fakeweb', '~> 1.2.8')
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
