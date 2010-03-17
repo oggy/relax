@@ -17,7 +17,7 @@ class CustomParserService < Relax::Service
   end
 end
 
-FakeWeb.register_uri(:get, 'http://test.local/rest', :string => <<-RESPONSE)
+FakeWeb.register_uri(:get, 'http://test.local/rest', :body => <<-RESPONSE)
   <?xml version="1.0" encoding="utf-8" ?>
   <test stat="ok">
   </test>

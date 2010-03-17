@@ -72,7 +72,7 @@ describe Relax::Endpoint do
         end
       end
 
-      FakeWeb.register_uri(:get, 'http://api.example.com/v1/', :string => <<-RESPONSE)
+      FakeWeb.register_uri(:get, 'http://api.example.com/v1/', :body => <<-RESPONSE)
         <?xml version="1.0" encoding="utf-8" ?>
         <response status="ok" />
       RESPONSE
