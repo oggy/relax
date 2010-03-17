@@ -1,9 +1,11 @@
 module Relax
   class Context
     attr_reader :parameters
+    attr_reader :request_processors
 
     def initialize(parameters=[]) # :nodoc:
       @parameters = parameters
+      @request_processors = []
     end
 
     def evaluate(&block) # :nodoc:
@@ -16,6 +18,10 @@ module Relax
       else
         raise ArgumentError.new("Duplicate parameter '#{name}'.")
       end
+    end
+
+    def process_request(&block)
+      @request_processors << block
     end
 
     def set(name, value)

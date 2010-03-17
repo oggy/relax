@@ -33,6 +33,9 @@ module Relax
 
     def performer(instance, options)
       values = instance.values(context)
+      context.request_processors.each do |processor|
+        values = processor.call(values, options)
+      end
       Performer.new(method, url, values, options)
     end
     private :performer

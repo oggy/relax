@@ -15,4 +15,9 @@ describe Relax::Context do
     service = BlankValuesService.new({}, :include_blank_values => true)
     service.test[:stat].should == 'ok'
   end
+
+  it "allows custom parameter processing" do
+    service = ProcessRequestService.new({:parameter => 1}, {:option => 2})
+    service.test[:stat].should == 'ok'
+  end
 end
