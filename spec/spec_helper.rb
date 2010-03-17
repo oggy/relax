@@ -5,7 +5,7 @@ require 'rubygems'
 gem 'rspec', '~> 1.2.2'
 require 'spec'
 
-gem 'fakeweb', '~> 1.2.2'
+gem 'fakeweb', '~> 1.2.8'
 require 'fakeweb'
 
 require File.join(File.dirname(__FILE__), '..', 'lib', 'relax')
