@@ -8,6 +8,11 @@ module Relax
       @request_processors = []
     end
 
+    def initialize_copy(other)
+      @parameters = other.parameters.collect { |parameter| parameter.clone }
+      @request_processors = other.request_processors.dup
+    end
+
     def evaluate(&block) # :nodoc:
       instance_eval(&block)
     end
@@ -42,11 +47,6 @@ module Relax
 
     def parse(response) # :nodoc:
       @parser.parse(response)
-    end
-
-    def clone # :nodoc:
-      cloned_parameters = @parameters.collect { |parameter| parameter.clone }
-      self.class.new(cloned_parameters)
     end
   end
 end

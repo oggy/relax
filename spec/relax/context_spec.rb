@@ -20,4 +20,9 @@ describe Relax::Context do
     service = ProcessRequestService.new({:parameter => 1}, {:option => 2})
     service.test[:stat].should == 'ok'
   end
+
+  it "allows custom parameter processing via #defaults" do
+    service = DefaultProcessRequestService.new({:parameter => 1}, {:option => 2})
+    service.test[:stat].should == 'ok'
+  end
 end
