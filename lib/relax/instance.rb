@@ -10,7 +10,7 @@ module Relax
 
     def values(context)
       context.parameters.inject({}) do |values, parameter|
-        name = parameter.options[:as] || parameter.name
+        name = parameter.accessor_name
 
         if (value = @values[name] || parameter.value) || @options[:include_blank_values]
           values[parameter.name] = value

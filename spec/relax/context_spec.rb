@@ -11,6 +11,11 @@ describe Relax::Context do
     service.test(:api_key => 'secret')[:stat].should == 'ok'
   end
 
+  it "allows parameters with programmatic aliases" do
+    service = ParameterAliasService.new
+    service.access_as_test(:foo_bar => 'value')[:stat].should == 'ok'
+  end
+
   it "allows blank parameters values" do
     service = BlankValuesService.new({}, :include_blank_values => true)
     service.test[:stat].should == 'ok'

@@ -1,11 +1,13 @@
 module Relax
   class Context
     attr_reader :parameters
+    attr_reader :alias_proc
     attr_reader :request_processors
 
     def initialize(parameters=[]) # :nodoc:
       @parameters = parameters
       @request_processors = []
+      @access_as = nil
     end
 
     def initialize_copy(other)
@@ -19,10 +21,14 @@ module Relax
 
     def parameter(name, options={})
       unless @parameters.find { |parameter| parameter.named?(name) }
-        @parameters << Parameter.new(name, options)
+        @parameters << Parameter.new(self, name, options)
       else
         raise ArgumentError.new("Duplicate parameter '#{name}'.")
       end
+    end
+
+    def access_as(&block)
+      @alias_proc = block
     end
 
     def process_request(&block)
