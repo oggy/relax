@@ -18,6 +18,16 @@ describe "an example service's" do
       }.should raise_error(ArgumentError, /missing.*user_id/i)
     end
 
+    it "escapes query parameters" do
+      FakeWeb.register_uri(:get, 'http://example.com?a%20b=c%20d', :body => <<-RESPONSE.gsub(/^ *\|/, ''))
+        |<?xml version="1.0" encoding="utf-8" ?>
+        |<response stat="ok">
+        |</response>
+      RESPONSE
+      value = Class.new{define_method(:to_s){'c d'}}.new
+      SpacesService.new(:'a b' => value).test[:stat].should == 'ok'
+    end
+
     it "parses the response" do
       flickr = Flickr.new(:api_key => 'secret')
       flickr.get_photos(:user_id => '59532755@N00', :per_page => 3).should == {

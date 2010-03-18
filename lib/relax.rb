@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'cgi'
 
 gem 'relief', '~> 0.0.4'
 require 'relief'

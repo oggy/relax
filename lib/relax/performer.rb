@@ -39,8 +39,9 @@ module Relax
 
     def query
       @values.collect do |name, value|
+        name, value = CGI.escape(name.to_s), CGI.escape(value.to_s)
         "#{name}=#{value}" if value || @options[:include_blank_values]
-      end.compact.join('&')
+      end.compact.join('&').gsub(/\+/, '%20')  # not everything supports +
     end
     private :query
 

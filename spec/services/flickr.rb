@@ -66,7 +66,7 @@ FakeWeb.register_uri(:get, 'http://api.flickr.com/services/rest?api_key=secret&m
   </rsp>
 RESPONSE
 
-FakeWeb.register_uri(:get, 'http://api.flickr.com/services/rest?user_id=59532755@N00&per_page=3&method=flickr.people.getPublicPhotos&api_key=secret', :body => <<-RESPONSE)
+FakeWeb.register_uri(:get, 'http://api.flickr.com/services/rest?user_id=59532755%40N00&per_page=3&method=flickr.people.getPublicPhotos&api_key=secret', :body => <<-RESPONSE)
 <?xml version="1.0" encoding="utf-8" ?>
 <rsp stat="ok">
   <photos page="1" pages="2610" perpage="3" total="7830">
