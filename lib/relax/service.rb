@@ -22,7 +22,7 @@ module Relax
     end
 
     def url(action, *args)
-      self.class.actions[action].make_url(@values, @options, *args)
+      self.class.actions[action].make_url(@options, @values, *args)
     end
 
     class << self
@@ -37,7 +37,7 @@ module Relax
           actions[action.name] = action
 
           define_method(action.name) do |*args|
-            action.execute(@values, @options, *args)
+            action.execute(@options, @values, *args)
           end
         else
           raise ArgumentError.new("Duplicate action '#{action.name}'.") 

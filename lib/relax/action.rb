@@ -14,16 +14,12 @@ module Relax
       context.evaluate(&block) if block_given?
     end
 
-    def make_url(values, options, *args)
-      args.unshift(values) if values
-      instance = Instance.new(options, *args)
-      response = performer(instance, options).url
+    def make_url(options, *values)
+      performer(options, *values).url
     end
 
-    def execute(values, options, *args)
-      args.unshift(values) if values
-      instance = Instance.new(options, *args)
-      response = performer(instance, options).perform
+    def execute(options, *values)
+      response = performer(options, *values).perform
       context.parse(response)
     end
 
@@ -37,7 +33,8 @@ module Relax
     end
     private :url
 
-    def performer(instance, options)
+    def performer(options, *values)
+      instance = Instance.new(options, *values)
       values = instance.values(context)
       context.request_processors.each do |processor|
         values = processor.call(values, options)
