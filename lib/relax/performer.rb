@@ -35,7 +35,6 @@ module Relax
       uri.userinfo = @credentials.join(':') if @credentials
       uri.to_s
     end
-    private :url
 
     def query
       @values.collect do |name, value|

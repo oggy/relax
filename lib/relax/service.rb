@@ -3,6 +3,7 @@ module Relax
     def initialize(values={}, options={})
       @values = values
       @options = options
+      @actions = []
     end
 
     def authenticate(*args)
@@ -20,6 +21,10 @@ module Relax
       self
     end
 
+    def url(action, *args)
+      self.class.actions[action].make_url(@values, @options, *args)
+    end
+
     class << self
       include Contextable
 
@@ -28,10 +33,8 @@ module Relax
       end
 
       def register_action(action) # :nodoc:
-        @actions ||= {}
-
-        unless @actions[action.name]
-          @actions[action.name] = action.name
+        unless actions[action.name]
+          actions[action.name] = action
 
           define_method(action.name) do |*args|
             action.execute(@values, @options, *args)
@@ -39,6 +42,10 @@ module Relax
         else
           raise ArgumentError.new("Duplicate action '#{action.name}'.") 
         end
+      end
+
+      def actions
+        @actions ||= {}
       end
     end
   end

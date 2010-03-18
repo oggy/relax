@@ -14,6 +14,12 @@ module Relax
       context.evaluate(&block) if block_given?
     end
 
+    def make_url(values, options, *args)
+      args.unshift(values) if values
+      instance = Instance.new(options, *args)
+      response = performer(instance, options).url
+    end
+
     def execute(values, options, *args)
       args.unshift(values) if values
       instance = Instance.new(options, *args)

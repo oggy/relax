@@ -1,6 +1,13 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe "an example service's" do
+  describe "#url" do
+    it "returns the URL sent for the request" do
+      url = ParameterAliasService.new(:api_key => 'secret').url(:test)
+      url.should == 'http://example.com/?APIKey=secret'
+    end
+  end
+
   describe "get_photos action" do
     it "includes :get_photos" do
       Flickr.new.should respond_to(:get_photos)
